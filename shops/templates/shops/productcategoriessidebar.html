@@ -1,0 +1,30 @@
+<div class="bg-white categories">
+    <p class="d-flex align-items-center m-0">
+        <span class="fs-5 fw-semibold">Product categories</span>
+    </p>
+    <hr class="my-2">
+    <ul class="list-unstyled ps-0">
+        {% for category in shop.product_category_list %}
+        <li class="mb-1">
+            {% if current_category == category %} 
+            <button class="btn btn-toggle align-items-center rounded-0 collapsed w-100" data-bs-toggle="collapse" data-bs-target="#{{ category.stripped_name }}"  aria-expanded="true">
+            {% else %}
+            <button class="btn btn-toggle align-items-center rounded-0 collapsed w-100" data-bs-toggle="collapse" data-bs-target="#{{ category.stripped_name }}"  aria-expanded="false">
+            {% endif %}
+                {{ category.category_name | capfirst }}
+            </button>
+            <div class="collapse {% if current_category == category %} show {% endif %}" id="{{ category.stripped_name }}">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                {% for sub_category in category.sub_category_list %}
+                <li>
+                    <a href="{% url 'products_by_sub_category' category.category_name  sub_category.subcategory_name %}" class="link-dark rounded">
+                        {{ sub_category.subcategory_name | capfirst }}
+                    </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

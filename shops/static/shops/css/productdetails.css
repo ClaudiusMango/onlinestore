@@ -1,0 +1,47 @@
+.card{
+    border: none;
+    overflow: hidden;
+    border: 1px solid #eee
+}
+.thumbnail_images ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top:10px;
+    overflow-x: auto;
+}
+.thumbnail_images ul li{
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid #eee;
+    cursor: pointer;
+    transition: all 0.5s
+}
+.thumbnail_images ul li:hover{
+    border: 2px solid #000
+}
+.main_image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    height: 400px;
+    width: 100%;
+}
+.main_image img{
+    max-width: 90%;
+    max-height: 90%;
+    width: auto;
+}
+.content p{
+    font-size: 14px;
+}
+.right-side ul{
+    list-style:circle;
+}
+.buttons .btn{
+    padding: 5px;
+    height: 50px;
+    flex: 0 1 200px;
+    border-radius: 0px !important
+}

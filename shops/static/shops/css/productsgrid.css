@@ -1,0 +1,35 @@
+.product-card{
+    width: 100%;
+    margin-right: 10px;
+}
+.product-card .card-body{
+    height: 300px;
+    position: relative;
+}
+.product-actions{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.product-actions > a {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-actions > button{
+    width: 48px;
+    height: 48px;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-card img{
+    max-height: 90%;
+    width: auto;
+    max-width: 100%;
+    margin: auto;
+}

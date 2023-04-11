@@ -1,0 +1,134 @@
+{% extends 'shops/app.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block appcontent %}
+<section class="h-100">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12">
+
+                <div class="card rounded-0 border-0">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            
+                            <div class="col-lg-8">
+                                <div class="px-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-5">
+                                        <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                                        <h6 class="mb-0 text-muted">{{cart.order.get_cart_items}} items</h6>
+                                    </div>
+
+                                    <hr class="my-4">
+                                    {% for item in cart.items %}
+
+                                    <div class="row mb-3 d-flex justify-content-between align-items-center">
+
+                                        <div class="col-md-2 col-lg-2 col-xl-2">
+                                            <img
+                                            src="{{item.product.imageURL}}"
+                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                        </div>
+
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                            <h6 class="text-muted">{{item.product.category|capfirst}}</h6>
+                                            <h6 class="text-black mb-0">{{item.product.name|capfirst}}</h6>
+                                        </div>
+
+                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex mt-3 mb-3 align-items-center">
+                                            <a onclick="event.preventDefault()" data-product="{{item.product.id}}" data-action="remove" href="#" class="update-cart me-2">
+                                                <svg class="bi" width="16" height="16"><use xlink:href="#minus"/></svg>
+                                                <span class="visually-hidden">Remove from cart</span>
+                                            </a>
+                                            <p class="p-2 border rounded-2 m-0">{{item.quantity}}</p>
+                                            <a onclick="event.preventDefault()" data-product="{{item.product.id}}" data-action="add" href="#" class="update-cart ms-2">
+                                                <svg class="bi" width="16" height="16"><use xlink:href="#plus"/></svg>
+                                                <span class="visually-hidden">Add to cart</span>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                            <h6 class="mb-0">{{item.get_total}} ksh</h6>
+                                        </div>
+                                        
+                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                            <button data-product="{{item.product.id}}" data-action='delete' class="update-cart btn btn-outline-danger">
+                                                <svg class="bi" width="16" height="16"><use xlink:href="#delete"/></svg>
+                                                <span class="visually-hidden">Delete from cart</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    <div class="alert alert-info show w-100" role="alert">
+                                        Your cart is empty.
+                                    </div>
+                                    {% endfor %}
+                
+                                    <hr class="my-4">
+                
+                                    <div class="pt-5">
+                                        <h6 class="mb-0">
+                                            <a href="{% url 'shop' %}" class="text-body">
+                                                <svg class="bi" width="16" height="16"><use xlink:href="#backarrow"/></svg>
+                                                Back to shop
+                                            </a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 bg-grey">
+                                <div class="px-3">
+                                    <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                                    <hr class="my-4">
+                
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <h5 class="text-uppercase">items {{cart.order.get_cart_items}}</h5>
+                                        <h5>{{cart.order.get_cart_total}} KSH</h5>
+                                    </div>
+
+                                    <form class="row" action="{% url 'cart' %}" method="post">
+                                        {% csrf_token %}
+                                        {% if form.non_field_errors %}
+                                            {% for error in form.non_field_errors %}
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                {{error}}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% for field in form %}
+                                        <div class="form-group">
+                                            {% for error in field.errors %}
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                {{error}}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                            {% endfor %}
+                                            {{ field.label_tag }}
+                                            {% if field.help_text %}
+                                            <p class="text-muted" >{{ field.help_text }}</p>
+                                            {% endif %}
+                                            {% render_field field class="form-control mb-2" %}
+                                        </div>
+                                        {% endfor %}
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit"  class="w-100 btn btn-outline-success rounded-0 d-flex align-items-center justify-content-center">
+                                                <p class="ms-2 m-0" >PLACE ORDER</p>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

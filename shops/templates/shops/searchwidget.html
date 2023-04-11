@@ -1,0 +1,16 @@
+<form action="{% url 'product_search' %}" method="post">
+    {% csrf_token %}
+    <div class="input-group">
+        <select class="form-control" id="exampleFormControlSelect1" name="category_name" aria-label="Search category">
+            <option value="all">All products</option>
+            {% for category in shop.product_category_list %}
+            <option value="{{ category.category_name }}">{{ category.category_name | capfirst }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" class="form-control rounded-0" name="product_name" placeholder="Search">
+        <button class="btn btn-outline-dark" type="submit">
+            <svg class="bi me-2" width="24" height="24"><use xlink:href="#search"/></svg>
+            <span class="visually-hidden" > search</span>
+        </button>
+    </div>
+</form>

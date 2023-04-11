@@ -1,0 +1,26 @@
+{% extends 'shops/app.html' %}
+
+{% load static %}
+
+{% block styles %}
+<style>
+    *{
+        /* border: solid black 1px; */
+    }
+</style>
+<link rel="stylesheet" href="{% static 'shops/css/productcategoriessidebar.css' %}">
+<link rel="stylesheet" href="{% static 'shops/css/productsgrid.css' %}">
+{% endblock %}
+
+{% block appcontent %}
+<div class="row m-0 h-100">
+    <div class="col-md-3">
+        {% include "shops/productcategoriessidebar.html" %}
+    </div>
+    <div class="col-md-9">
+        {% include 'shops/searchwidget.html' %}
+        {% include "shops/productsgrid.html" %}
+        {% include "shops/paginator.html" %}
+    </div>
+</div>
+{% endblock %}

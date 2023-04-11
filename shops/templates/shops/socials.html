@@ -1,0 +1,14 @@
+<ul class="nav list-unstyled d-flex">
+    {% if shop.facebook_link != None and shop.facebook_link != "" %}
+    <li><a class="text-white" target="_blank" href="{{ shop.facebook_link  }}"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+    {% endif %}
+    {% if shop.instagram_link != None and shop.instagram_link != "" %}
+    <li class="ms-3"><a class="text-white" target="_blank" href="{{ shop.instagram_link }}"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+    {% endif %}
+    {% if shop.instagram_link != None and shop.instagram_link != "" %}
+    <li class="ms-3"><a class="text-white" target="_blank" href="{{ shop.twitter_link }}"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+    {% endif %}
+    {% if shop.whatsapp_number != None and shop.whatsapp_number != "" %}
+    <li class="ms-3"><a class="text-white" target="_blank" href="https://wa.me/{{ shop.whatsapp_number }}"><svg class="bi" width="24" height="24"><use xlink:href="#whatsapp"/></svg></a></li>
+    {% endif %}
+</ul>
